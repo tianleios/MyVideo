@@ -262,8 +262,8 @@
 		2EFA4D351C50D91600D8DB0E /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		2EFDD64C1C51D6840057A894 /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFPSLabel.h; sourceTree = "<group>"; };
 		2EFDD64D1C51D6840057A894 /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFPSLabel.m; sourceTree = "<group>"; };
-		2EFDD6521C54B2E50057A894 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		2EFDD6531C54B2E50057A894 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		2EFDD6521C54B2E50057A894 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = ../MBProgressHUD.h; sourceTree = "<group>"; };
+		2EFDD6531C54B2E50057A894 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,8 +303,6 @@
 			isa = PBXGroup;
 			children = (
 				2EC684FF1C4CDC990022C93F /* Common */,
-				2EFDD6521C54B2E50057A894 /* MBProgressHUD.h */,
-				2EFDD6531C54B2E50057A894 /* MBProgressHUD.m */,
 				2EC684F81C4CDBF50022C93F /* Controllers */,
 				2EC684FC1C4CDBFA0022C93F /* Models */,
 				2EC684FD1C4CDBFF0022C93F /* Views */,
@@ -375,6 +373,8 @@
 		2EC684FF1C4CDC990022C93F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2EFDD6521C54B2E50057A894 /* MBProgressHUD.h */,
+				2EFDD6531C54B2E50057A894 /* MBProgressHUD.m */,
 				2EFDD64B1C51D65F0057A894 /* TOOL */,
 				2EFDD64A1C51D6500057A894 /* Category */,
 				2EC685BF1C4D10D60022C93F /* TLBaseModel.h */,
