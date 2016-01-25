@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  UIView+add.h
 //  MyVideo
 //
 //  Created by 田磊 on 16/1/18.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface UIView (add)
 
 @end
-

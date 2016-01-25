@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  MyVideo
+//
+//  Created by 田磊 on 16/1/18.
+//  Copyright © 2016年 田磊. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "MyVideoHeader.h"
+
+
+
+#endif /* PrefixHeader_pch */
