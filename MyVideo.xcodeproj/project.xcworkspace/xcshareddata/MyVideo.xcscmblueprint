@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "88ED60DB6B60ED23CFE1BB95BCE31BBEA39DDEE6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "88ED60DB6B60ED23CFE1BB95BCE31BBEA39DDEE6" : 0,
+    "1EFEDF8ED0B6ADD5C75A23553DB7B007151DC8D3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8A17A3C0-2EA6-4253-AB96-317CE2AA1B37",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "88ED60DB6B60ED23CFE1BB95BCE31BBEA39DDEE6" : "MyVideo\/",
+    "1EFEDF8ED0B6ADD5C75A23553DB7B007151DC8D3" : "MyVideo\/MyVideo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MyVideo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MyVideo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tianleios\/MyVideo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1EFEDF8ED0B6ADD5C75A23553DB7B007151DC8D3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tianleios\/MyVideo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "88ED60DB6B60ED23CFE1BB95BCE31BBEA39DDEE6"
+    }
+  ]
+}
