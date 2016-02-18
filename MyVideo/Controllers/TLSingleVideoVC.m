@@ -22,7 +22,7 @@
     [_moviePlayerController stop];
     [_moviePlayerController.view removeFromSuperview];
     _moviePlayerController = nil;
-    
+    NSLog(@"释放");
 }
 
 ///////////////////////////////////////////////
@@ -73,15 +73,14 @@
 {
     _viewModel = viewModel;
     
-    
     self.urlString = _viewModel.personal.channel.stream.base;
-    
     [self.moviePlayerController prepareToPlay];
     
     if (self.moviePlayerController.isPreparedToPlay) {
+        
         [self.moviePlayerController play];
+
     }
-    
     
 //    [self.moviePlayerController  shouldAutoplay];
 //    [self presentViewController:animated:YES completion:^{
@@ -92,7 +91,6 @@
 //    //    NSURL *url = [NSURL URLWithString:@"http://bbs.csdn.net/topics/391000065"];
 //    NSMutableURLRequest *urlR = [[NSMutableURLRequest alloc] initWithURL:url];
 //    [self.webV loadRequest:urlR];
-
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

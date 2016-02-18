@@ -18,6 +18,9 @@
 #import "AFNetworking.h"
 #import "UIView+ACFrame.h"
 #import "MBProgressHUD.h"
+//swift
+#import "MyVideo-Swift.h"
+
 //
 #define kScreenWidth_tl   [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight_tl   [UIScreen mainScreen].bounds.size.height

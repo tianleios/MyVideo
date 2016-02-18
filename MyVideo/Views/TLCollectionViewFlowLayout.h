@@ -21,7 +21,10 @@
 
 @interface TLCollectionViewFlowLayout : UICollectionViewLayout
 
-@property (nonatomic, weak) id <TLCollectionViewFlowLayoutDelegate> flowlayoutDelegate;
+// default is 2.  this value less than 2 is nothing. when this value is 2 支持高度的矫正
 
+@property (nonatomic, assign) NSInteger numOfFlow;
+
+@property (nonatomic, weak) id <TLCollectionViewFlowLayoutDelegate> flowlayoutDelegate;
 
 @end

@@ -88,6 +88,7 @@
 		2EC685E81C4D23620022C93F /* TLCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC685E71C4D23620022C93F /* TLCollectionViewFlowLayout.m */; };
 		2EC685EB1C4D23970022C93F /* TLViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC685EA1C4D23970022C93F /* TLViewModel.m */; };
 		2EC685F41C4D361C0022C93F /* TLCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EC685F31C4D361C0022C93F /* TLCollectionViewCell.m */; };
+		2EF7C2B21C5E0465006F83AF /* TLHellow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF7C2B11C5E0465006F83AF /* TLHellow.swift */; };
 		2EFA4D301C50CE5B00D8DB0E /* TLSingleVideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EFA4D2F1C50CE5B00D8DB0E /* TLSingleVideoVC.m */; };
 		2EFA4D321C50D8E300D8DB0E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFA4D311C50D8E300D8DB0E /* MediaPlayer.framework */; };
 		2EFA4D341C50D90D00D8DB0E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EFA4D331C50D90D00D8DB0E /* AVFoundation.framework */; };
@@ -260,6 +261,8 @@
 		2EC685EA1C4D23970022C93F /* TLViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLViewModel.m; sourceTree = "<group>"; };
 		2EC685F21C4D361C0022C93F /* TLCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLCollectionViewCell.h; sourceTree = "<group>"; };
 		2EC685F31C4D361C0022C93F /* TLCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLCollectionViewCell.m; sourceTree = "<group>"; };
+		2EF7C2B11C5E0465006F83AF /* TLHellow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLHellow.swift; sourceTree = "<group>"; };
+		2EF7C2B31C5E04BA006F83AF /* MyVideo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyVideo-Bridging-Header.h"; sourceTree = "<group>"; };
 		2EFA4D2E1C50CE5B00D8DB0E /* TLSingleVideoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLSingleVideoVC.h; sourceTree = "<group>"; };
 		2EFA4D2F1C50CE5B00D8DB0E /* TLSingleVideoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLSingleVideoVC.m; sourceTree = "<group>"; };
 		2EFA4D311C50D8E300D8DB0E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -368,6 +371,8 @@
 				2EC685EA1C4D23970022C93F /* TLViewModel.m */,
 				2EC685E31C4D1A240022C93F /* TLTool.h */,
 				2EC685E41C4D1A240022C93F /* TLTool.m */,
+				2EF7C2B11C5E0465006F83AF /* TLHellow.swift */,
+				2EF7C2B31C5E04BA006F83AF /* MyVideo-Bridging-Header.h */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -786,6 +791,7 @@
 				2EC685C11C4D10D60022C93F /* TLBaseModel.m in Sources */,
 				2EC6859A1C4CDDC00022C93F /* TLCollectionView.m in Sources */,
 				2EC685B81C4D09DA0022C93F /* AFURLResponseSerialization.m in Sources */,
+				2EF7C2B21C5E0465006F83AF /* TLHellow.swift in Sources */,
 				2EC685B41C4D09DA0022C93F /* AFNetworkReachabilityManager.m in Sources */,
 				2EC6857D1C4CDC990022C93F /* MJRefreshBackNormalFooter.m in Sources */,
 				2E2D48541C5620AA009AD6ED /* main.m in Sources */,
@@ -888,12 +894,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MyVideo/Others/PrefixHeader.pch";
 				INFOPLIST_FILE = MyVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tianlei.MyVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MyVideo/Controllers/MyVideo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -902,12 +912,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MyVideo/Others/PrefixHeader.pch";
 				INFOPLIST_FILE = MyVideo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tianlei.MyVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MyVideo/Controllers/MyVideo-Bridging-Header.h";
 			};
 			name = Release;
 		};

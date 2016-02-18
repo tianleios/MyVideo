@@ -12,7 +12,7 @@
 #import "TLCollectionView.h"
 #import "TLCollectionViewFlowLayout.h"
 #import "YYFPSLabel.h"
-
+//#import "MyVideo-Bridging-Header.h"
 @interface ViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *roomCollectionV;
@@ -37,11 +37,10 @@
     if (_refreshSate == nil) {
         _refreshSate = [NSMutableArray array];
         for (int i = 0; i < 3; i ++) {
-            _refreshSate[i] = @"0";
+            _refreshSate[i] = @"0"; //记录刷新状态
         }
         
     }
-    
     return _refreshSate;
 }
 
@@ -65,6 +64,8 @@
         [tlcv.mj_header beginRefreshing];
     }
 
+    
+    
 }
 
 
@@ -81,6 +82,20 @@
     [self setUpFrame];
     
 //    [self other];
+    
+    NSCache *cache = [[NSCache alloc] init];
+
+    NSBundle *bundle = [NSBundle mainBundle];
+    
+    UIImage *image = [UIImage imageWithContentsOfFile:[bundle pathForResource:@"屏幕快照 2016-01-25 下午4.56.00.png" ofType:nil]];
+    
+    [cache setObject:image forKey:@"image01"];
+    
+    NSLog(@"%@~~~~~~~~~",[cache objectForKey:@"image01"]);
+    [cache removeObjectForKey:@"image01"];
+    NSLog(@"%@~~~~~~~~~",[cache objectForKey:@"image01"]);
+
+    
 }
 
 - (void)other
@@ -135,7 +150,6 @@
     _scrollV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth_tl, kScreenHeight_tl - 64)];
     _scrollV.contentSize = CGSizeMake(3*kScreenWidth_tl, kScreenHeight_tl - 64);
     _scrollV.pagingEnabled = YES;
-//    _scrollV.alwaysBounceHorizontal = YES;
     _scrollV.backgroundColor = [UIColor orangeColor];
     _scrollV.delegate  =  self;
     [self.view addSubview:_scrollV];
@@ -152,7 +166,6 @@
         __weak typeof(cv) weakCV = cv;
         TLTool *tool = [TLTool shareTool];
         cv.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            
             
             [tool refreshWithType:[typeArray[i] integerValue] success:^(id responseObject) {
                 

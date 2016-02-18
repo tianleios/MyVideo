@@ -10,88 +10,99 @@
 
 #import "TLAlbum.h"
 #import "TLPersonal.h"
-
 #import "TLViewModel.h"
 
 #define kStarUrl  @"http://api.miaopai.com/m/cate2_channel?extend=1&os=ios&per=20&type=news&unique_id=6250bd05dd20043b0bc0cfc2c6a678ae576096332&version=6.2.6"
 
-//static NSInteger _lastPage;
-static NSInteger _currentPage;
 
 @interface TLTool ()
 
-@property (nonatomic, strong) NSMutableArray *datas;
-
+@property (nonatomic, strong) NSMutableDictionary *dataDict;
 
 
 @end
+
+NSInteger _pageInfo[3] = {1};
 
 @implementation TLTool
 
 + (void)initialize
 {
     if (self == [TLTool class]) {
-        
+    
 //        _lastPage = 0;
-        _currentPage = 1;
+//        _currentPage = 1;
         
     }
+}
+static TLTool *_tool = nil;
+
+//严格创建单例 保证只分配一份内存空间
++ (instancetype)allocWithZone:(struct _NSZone *)zone
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _tool = [super allocWithZone:zone];
+    });
+    return _tool;
+
 }
 
 + (instancetype)shareTool
 {
-    static TLTool *tool = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        tool = [[TLTool alloc] init];
+        _tool = [[TLTool alloc] init];
+        //初始化分页信息
+//        tool.page = [[TLPage alloc] init];
+        _tool.dataDict = [NSMutableDictionary dictionary];
+        
+        _tool.dataDict[[NSString stringWithFormat:@"%ld",TLToolCategoryTypeIdea]] =[NSMutableArray array];
+        _tool.dataDict[[NSString stringWithFormat:@"%ld",TLToolCategoryTypeStar]] =[NSMutableArray array];
+        _tool.dataDict[[NSString stringWithFormat:@"%ld",TLToolCategoryTypeJoke]] =[NSMutableArray array];
+        
     });
-    return tool;
-}
-
-- (NSMutableArray *)datas
-{
-    if (_datas == nil) {
-        _datas = [NSMutableArray array];
-    }
-    
-    return _datas;
-    
+    return _tool;
 }
 
 //下拉刷新
 - (void)refreshWithType:(TLToolCategoryType)toolCategoryType success:(void(^)(id responseObject))success failure:(void(^)(NSError *  error))failure
 {
-    NSInteger page = 1;
-    [self getDataWithPage:&page category:toolCategoryType type:TLToolGetDataTypeLoadRefresh success: success ? success :nil failure:failure ? failure : nil];
+    [self getDataWithPage:(_pageInfo +[self getPageBy:toolCategoryType]) category:toolCategoryType type:TLToolGetDataTypeLoadRefresh success: success ? success :nil failure:failure ? failure : nil];
 
 }
 
 //上拉加载更多
 - (void)loadMoreWithType:(TLToolCategoryType)toolCategoryType success:(void(^)(id responseObject))success failure:(void(^)(NSError *  error))failure
 {
-    [self getDataWithPage:&_currentPage category:toolCategoryType type:TLToolGetDataTypeLoadMore success: success ? success :nil failure:failure ? failure : nil];
+    [self getDataWithPage:(_pageInfo +[self getPageBy:toolCategoryType]) category:toolCategoryType type:TLToolGetDataTypeLoadMore success: success ? success :nil failure:failure ? failure : nil];
 }
 
 //网络请求最底层方法
-- (void)getDataWithPage:(NSInteger *)page category:(TLToolCategoryType)categoryType type:(TLToolGetDataType)getDataType success:(void(^)(id responseObject))success failure:(void(^)(NSError * _Nonnull error))failure
+- (void)getDataWithPage:(NSInteger *)typePage category:(TLToolCategoryType)categoryType type:(TLToolGetDataType)getDataType success:(void(^)(id responseObject))success failure:(void(^)(NSError * _Nonnull error))failure
 {
-//cateid=124&
+    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"page"] = [NSString stringWithFormat:@"%ld",*page];
+    parameters[@"page"] = getDataType == TLToolGetDataTypeLoadRefresh ? @"1" :[NSString stringWithFormat:@"%ld",*typePage];
     parameters[@"cateid"] = [NSString stringWithFormat:@"%ld",categoryType];
+    
     [manager GET:kStarUrl parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         
         //数据解析耗时操作放在子线程
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray *result = responseObject[@"result"];
             
-            //如果是下拉刷新就清空数据
+            NSMutableArray *dataArray = self.dataDict[[NSString stringWithFormat:@"%ld",categoryType]];
+            
             if (getDataType == TLToolGetDataTypeLoadRefresh) {
-                self.datas = nil;
+                
+                [dataArray removeAllObjects];
+                
             }
+            //数据临时保存
             
             //改变方式 ，把ViewModel进行传输
             for (int i = 0; i < result.count; i++) {
@@ -106,13 +117,13 @@ static NSInteger _currentPage;
                     TLAlbum *album = [TLAlbum objectWithKeyValues:dict];
                     viewModel.album = album;
                   
-                    [self.datas addObject:viewModel];
-                    
+                    [dataArray addObject:viewModel];
+
                 }else if([type isEqualToString:@"channel"]){
                     
                     TLPersonal *personal = [TLPersonal objectWithKeyValues:dict];
                     viewModel.personal = personal;
-                    [self.datas addObject:viewModel];
+                    [dataArray addObject:viewModel];
                     
                 }
                 
@@ -123,11 +134,14 @@ static NSInteger _currentPage;
                 if (success) {
                     
                     if (getDataType == TLToolGetDataTypeLoadMore) {
-                        (*page) ++;  //成功Page+ 1
+
+                        *typePage = *typePage +1;
                     }else{  //当前查询页变为1
-                        _currentPage = 2;
+
+                        *typePage = 2;
+
                     }
-                    success(self.datas);
+                    success(dataArray);
                     
                 }
                 
@@ -144,6 +158,16 @@ static NSInteger _currentPage;
         
     }];
 
+}
 
+- (NSInteger)getPageBy:(TLToolCategoryType)categoryType
+{
+    switch (categoryType) {
+        case 124 : return 0; break;
+        case 128 : return 1; break;
+            
+        default: return 2; break;
+            
+    }
 }
 @end

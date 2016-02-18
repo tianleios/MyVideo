@@ -17,8 +17,8 @@
 @property (nonatomic, strong) NSMutableArray *ys;
 
 
-
 @end
+
 @implementation TLCollectionViewFlowLayout
 {
     //判断有无数据，如果没有数据直接返回
@@ -208,11 +208,11 @@
     UICollectionViewLayoutAttributes *layoutAttributes = [UICollectionViewLayoutAttributes
                                        layoutAttributesForCellWithIndexPath:indexPath];
     
-    
     CGFloat x = [_xs[indexPath.row] floatValue];
     CGFloat y = [_ys[indexPath.row] floatValue];
     CGSize size = [self.sizes[indexPath.row] CGSizeValue];
     layoutAttributes.frame = CGRectMake( x, y, size.width, size.height);
     return layoutAttributes;
+    
 }
 @end

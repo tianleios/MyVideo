@@ -33,10 +33,15 @@
         [self addSubview:_imageV];
         _imageV.backgroundColor = [UIColor redColor];
 
-        
+        //头像
         _iconIv = [[UIImageView alloc] init];
+        _iconIv.layer.masksToBounds = YES;
+        _iconIv.layer.borderWidth = 2;
+        _iconIv.layer.borderColor = [UIColor whiteColor].CGColor;
+        _iconIv.layer.shouldRasterize = YES;
         [self addSubview:_iconIv];
         
+        //名称
         _nameLbl = [[UILabel alloc] init];
         [self addSubview:_nameLbl];
         _nameLbl.textColor = [UIColor grayColor];
@@ -65,8 +70,6 @@
         _loverLayer = [[CATextLayer alloc] init];
         [self.layer addSublayer: _loverLayer];
 
-//        _loverLayer.foregroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"placeholder"]].CGColor;
-//        _loverLayer.foregroundColor  = [UIColor colorWithRed:100 green:].CGColor;
         _loverLayer.foregroundColor = [UIColor purpleColor].CGColor;
         _loverLayer.fontSize = 15;
         _loverLayer.alignmentMode = kCAAlignmentRight;
@@ -117,10 +120,9 @@
         _iconIv.frame  = _viewModel.iconF;
         NSURL *urlIcon = [NSURL URLWithString:_viewModel.personal.channel.ext.owner.icon];
         [_iconIv sd_setImageWithURL:urlIcon placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        _iconIv.layer.masksToBounds = YES;
+
         _iconIv.layer.cornerRadius = _iconIv.width/2;
-        _iconIv.layer.borderWidth = 2;
-        _iconIv.layer.borderColor = [UIColor whiteColor].CGColor;
+
         
         //名字
         _nameLbl.frame = _viewModel.nameF;
